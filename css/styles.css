@@ -1,0 +1,180 @@
+/* 原 style 存档 */
+
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: rgba(254, 241, 217, 0.718);
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header and Title */
+header {
+    position: relative;
+    padding: 90px 0;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 300;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Navigation Links */
+.nav-left,
+.nav-right {
+    position: absolute;
+    top: 35px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.nav-left {
+    left: 20px;
+}
+
+.nav-right {
+    right: 20px;
+}
+
+/* Main Content */
+main {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    /* Pushes content below the title */
+}
+
+/* Image Grid */
+.grid {
+    display: flex;
+    gap: 20px;
+}
+
+.block {
+    width: 250px;
+    height: 250px;
+    border-radius: 0px;
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out;
+    /* Smooth transition */
+}
+
+.block:hover {
+    transform: scale(1.1);
+    /* Zoom-in effect */
+    opacity: 1;
+    /* Keep hovered image fully visible */
+}
+
+/* Make other images transparent when hovering */
+.grid:hover .block {
+    opacity: 0.5;
+    /* Other images become semi-transparent */
+}
+
+.block:hover {
+    transform: scale(1.1);
+    /* Zoom-in effect */
+    opacity: 1 !important;
+    /* Ensure hovered image stays fully visible */
+}
+
+.image-container {
+    position: relative;
+    /* This makes the text appear inside the image */
+    width: 240px;
+    height: 240px;
+    border-radius: 0px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Hidden Text (Appears on Hover) */
+.image-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.image-number {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Show Text on Hover */
+.image-container:hover .image-text,
+.image-container:hover .image-number {
+    opacity: 1;
+}
+
+.image-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.image-number {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.image-label {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 20px;
+    font-size: 14px;
+    font-weight: 200;
+    color: black;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* Footer */
+footer {
+    margin-top: 180px;
+}
+
+/* Mini Image Grid */
+.mini-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.mini-block {
+    width: 40px;
+    height: 40px;
+    border-radius: 0px;
+    object-fit: cover;
+}
