@@ -45,7 +45,7 @@ function initializeGrid() {
 
         const largeText = document.createElement('div');
         largeText.classList.add('image-text');
-        largeText.innerHTML = `<span>STAGE</span><span>${index + 1}</span>`;
+        largeText.innerHTML = `<span>STAGE</span><span>0${index + 1}</span>`;
         largeBlock.appendChild(largeText);
 
         largeGrid.appendChild(largeBlock);
@@ -84,7 +84,7 @@ function showWaveDetail(waveId) {
 
         const contentTop = document.createElement('div');
         contentTop.classList.add('wave-content-top');
-        contentTop.innerHTML = `<a class='back-arrow' href='index.html'></a><h3>STAGE 0${waveId.slice(-1)}</h3>`;
+        contentTop.innerHTML = `<h3>STAGE 0${waveId.slice(-1)}</h3>`;
 
         contentBlock.appendChild(contentTop);
 
@@ -105,14 +105,18 @@ function showWaveDetail(waveId) {
         `;
 
         const textBlock = document.createElement('div');
+        textBlock.classList.add('text-block');
         textBlock.innerHTML = waveData.description;
 
-        contentBottom.appendChild(colorBlock);
         contentBottom.appendChild(textBlock);
+        contentBottom.appendChild(colorBlock);
 
         contentBlock.appendChild(contentBottom);
 
         largeGrid.appendChild(contentBlock);
+        miniGrid.innerHTML = `
+            <div class="back-arrow-container"><a href="#" class="back-arrow"></a></div >
+        `;
     }
 }
 
