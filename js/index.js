@@ -1,17 +1,50 @@
+let elements = null;
+
+function initializeElements() {
+    elements = {
+        largeGrid: document.getElementById('large-grid'),
+        miniGrid: document.getElementById('mini-grid'),
+        gridView: document.getElementById('grid-view'),
+        articleView: document.getElementById('article-view')
+    };
+
+    // 验证所有必需的DOM元素是否存在
+    Object.entries(elements).forEach(([key, element]) => {
+        if (!element) {
+            console.error(`必需的DOM元素 "${key}" 未找到`);
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+    initializeElements();
     initializeGrid();
 });
 
-function toggleView() {
-    const gridView = document.getElementById('grid-view');
-    const articleView = document.getElementById('article-view');
+const CONSTANTS = {
+    ACTIVE_CLASS: 'active',
+    INACTIVE_CLASS: 'inactive',
+    WAVE_DETAIL_CLASS: 'wave-detail',
+    LARGE_GRID_CLASS: 'large-grid'
+};
 
-    if (gridView.classList.contains('active')) {
-        gridView.classList.replace('active', 'inactive');
-        articleView.classList.replace('inactive', 'active');
+function toggleView() {
+    const { gridView, articleView, miniGrid } = elements;
+    miniGrid.innerHTML = '';
+
+    if (gridView.classList.contains(CONSTANTS.ACTIVE_CLASS)) {
+        gridView.classList.replace(CONSTANTS.ACTIVE_CLASS, CONSTANTS.INACTIVE_CLASS);
+        articleView.classList.replace(CONSTANTS.INACTIVE_CLASS, CONSTANTS.ACTIVE_CLASS);
+        data.forEach((item, index) => {
+            const miniBlock = document.createElement('img');
+            miniBlock.src = item.url;
+            miniBlock.alt = `Mini Wave ${index + 1}`;
+            miniGrid.appendChild(miniBlock);
+        });
     } else {
-        articleView.classList.replace('active', 'inactive');
-        gridView.classList.replace('inactive', 'active');
+        handleHashChange()
+        articleView.classList.replace(CONSTANTS.ACTIVE_CLASS, CONSTANTS.INACTIVE_CLASS);
+        gridView.classList.replace(CONSTANTS.INACTIVE_CLASS, CONSTANTS.ACTIVE_CLASS);
     }
 }
 
@@ -19,15 +52,15 @@ window.addEventListener('hashchange', handleHashChange);
 window.addEventListener('load', handleHashChange);
 
 function initializeGrid() {
-    const largeGrid = document.getElementById('large-grid');
-    const miniGrid = document.getElementById('mini-grid');
+    const { largeGrid, miniGrid } = elements;
 
     largeGrid.innerHTML = '';
     miniGrid.innerHTML = '';
 
-    largeGrid.classList.remove('wave-detail');
-    largeGrid.classList.add('large-grid');
+    largeGrid.classList.remove(CONSTANTS.WAVE_DETAIL_CLASS);
+    largeGrid.classList.add(CONSTANTS.LARGE_GRID_CLASS);
 
+    const fragment = document.createDocumentFragment();
     data.forEach((item, index) => {
         const miniBlock = document.createElement('img');
         miniBlock.src = item.url;
@@ -48,8 +81,9 @@ function initializeGrid() {
         largeText.innerHTML = `<span>STAGE</span><span>0${index + 1}</span>`;
         largeBlock.appendChild(largeText);
 
-        largeGrid.appendChild(largeBlock);
+        fragment.appendChild(largeBlock);
     });
+    largeGrid.appendChild(fragment);
 }
 
 function handleHashChange() {
@@ -64,13 +98,12 @@ function handleHashChange() {
 }
 
 function showWaveDetail(waveId) {
-    const largeGrid = document.getElementById('large-grid');
-    const miniGrid = document.getElementById('mini-grid');
+    const { largeGrid, miniGrid } = elements;
     largeGrid.innerHTML = '';
     miniGrid.innerHTML = '';
 
-    largeGrid.classList.remove('large-grid');
-    largeGrid.classList.add('wave-detail');
+    largeGrid.classList.remove(CONSTANTS.LARGE_GRID_CLASS);
+    largeGrid.classList.add(CONSTANTS.WAVE_DETAIL_CLASS);
 
     const waveData = data.find(item => item.id === waveId);
 
